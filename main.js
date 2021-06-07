@@ -9,19 +9,17 @@ document.addEventListener('DOMContentLoaded', function(){
         result.forEach((element, index) => {
             const link = document.createElement('a')
             const url = `/${index}`
-            const title = document.createElement('h2')
-            title.textContent = element.body
-            const subtitle = document.createElement('p')
-            subtitle.textContent = element.title
+            const content = `
+            <h1>${element.title}</h1>
+            <p>${element.body}</p>
+            `
             link.innerText = element.title;
             link.href = url
             linksContainer.appendChild(link)
             link.addEventListener('click', (e) => {
                 e.preventDefault()
                 history.pushState(null, null, url)
-                console.log(linksContent)
-                linksContent.textContent = element.title + element.body
-
+                linksContent.innerHTML = content;
             })
         });
     })
