@@ -1,0 +1,11 @@
+a {
+    display: block;
+}
+
+main {
+    display: flex;
+}
+
+.content {
+    width: 50%;
+}
