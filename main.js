@@ -12,6 +12,14 @@ function displayTitles(array) {
         link.href = url
         link.innerText = element.title;
         linksContainer.appendChild(link)
+
+        link.addEventListener('click', (e) => {
+            e.preventDefault()
+            let url = link.href
+            articleLoading(url, array, linksContainer)
+        })
+
+        
     })
 }
 
@@ -33,50 +41,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
         displayTitles(result)
 
-        const link = document.querySelectorAll('#link')
-
-        link.forEach( link => {
-
-            link.addEventListener('click', (e) => {
-                e.preventDefault()
-                let url = link.href
-                articleLoading(url, result, linksContainer)
-            })
-        })
-
         button.addEventListener('click', () => {
             linksContainer.innerHTML = '';
             displayTitles(result)
         })
-
-            // link.addEventListener('click', (e) => {
-
-            //     e.preventDefault()
-            //     let objectId = url.substring(url.lastIndexOf("/")+1);
-            //     let currentObject = result.find(e => e.id == objectId)
-            //     const content = `
-            //         <h1>${currentObject.title}</h1>
-            //         <p>${currentObject.body}</p>
-            //         `
-
-            //     linksContainer.innerHTML = content;
-            //     const button = document.createElement('button')
-            //     button.innerText = 'Назад'
-            //     linksContainer.prepend(button)
-
-            //     button.addEventListener('click', () => {
-
-            //       linksContainer.innerHTML = '';
-
-            //       result.forEach((element) => {
-            //         const link2 = document.createElement('a')
-            //         link2.href = url
-            //         console.log(link2.href)
-            //         link2.innerText = element.title;
-            //         linksContainer.appendChild(link2)
-            //       })
-            //     })
-            // })
     })
   });
 
