@@ -1,4 +1,4 @@
-const linksContainer = document.querySelector('#linksContainer')
+const linksContainer = document.getElementById('linksContainer')
 const baseURL = 'https://jsonplaceholder.typicode.com/posts'
 const button = document.createElement('button')
 button.innerText = 'Назад'
@@ -8,7 +8,6 @@ function displayTitles(array) {
     array.forEach(element => {
         let url = `/${element.id}`
         const link = document.createElement('a')
-        link.id = 'link'
         link.href = url
         link.innerText = element.title;
         linksContainer.appendChild(link)
@@ -16,22 +15,25 @@ function displayTitles(array) {
         link.addEventListener('click', (e) => {
             e.preventDefault()
             let url = link.href
-            articleLoading(url, array, linksContainer)
+            articleLoading(url, linksContainer)
         })
-
-        
     })
 }
 
-function articleLoading(url, array, container) {
+function articleLoading(url, container) {
     let objectId = url.substring(url.lastIndexOf("/")+1);
-    let currentObject = array.find(e => e.id == objectId)
-    const content = `
-        <h1>${currentObject.title}</h1>
-        <p>${currentObject.body}</p>
-        `
-    container.innerHTML = content;
-    container.prepend(button)
+
+    let response = fetch(baseURL)
+    .then(response => response.json())
+    .then(result => {
+      let currentObject = result.find(e => e.id == objectId)
+      const content = `
+          <h1>${currentObject.title}</h1>
+          <p>${currentObject.body}</p>
+          `
+      container.innerHTML = content;
+      container.prepend(button)
+    })
 }
 
 document.addEventListener('DOMContentLoaded', function(){ 
