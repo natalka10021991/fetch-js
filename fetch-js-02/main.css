@@ -1,0 +1,9 @@
+a {
+    display: block;
+  }
+
+  .comment {
+      border:1px solid lightblue;
+      margin: 10px;
+      padding: 10px;
+  }
